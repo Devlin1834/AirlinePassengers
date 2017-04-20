@@ -140,16 +140,16 @@ ggplot(mco.lag, aes(x = LAG, y = INT)) +
 
 ### Graph 9: First Difference ###
 diff.mco <- mco
-for(i in 1:12){
+for(i in 1:12){                                 # need to remove data points to fit the differenced series
 	diff.mco <- diff.mco[-1,]
-}
-diff.mco <- diff.mco[-1,]
-diff1 <- diff(mco$INTERNATIONAL)
-sdiff <- diff(diff1, lag = 12)
+}                                               # range of 13 deleted one row too many, and 12 deleted one too few
+diff.mco <- diff.mco[-1,]                       # Hence, why this is necessary
+diff1 <- diff(mco$INTERNATIONAL)                # Apply The first difference
+sdiff <- diff(diff1, lag = 12)                  # Apply a 12 period seasonal Difference
 diff.mco[6] <- as.data.frame(sdiff)
-colnames(diff.mco)[6] <- c('S.Difference')
+colnames(diff.mco)[6] <- c('S.Difference')      # Rename
 ggplot(diff.mco, aes(y = S.Difference, x = (Year + (Month/12)))) + geom_line() + 
 	labs(x = 'Year', y = 'International Passengers', title = 'International Passengers landing at MCO',
 	subtitle = 'First Difference with a 12 Period Seasonal Difference') +
-      xlim(2004, 2016) + mco_theme
+        xlim(2004, 2016) + mco_theme
 
