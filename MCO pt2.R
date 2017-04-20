@@ -205,7 +205,19 @@ qqfunc(int.ma1, sqrt(77480339))
 # This compares our QQNorm to 8 other randomly generated plots with the same
 # sample size and variance
 # Mine is still fairly extreme, but I've seen worse
+win.graph(height = 6, width = 12)
+plot(int.ma1, n.ahead=24, n1 = c(2014, 1), type = 'b', 
+     ylab = 'International Visitors', xlab = 'Year',
+     main = 'Forecast of Interntaional Passengers')
+abline(v=2016.58, lty = 'dashed', col = 'darkorange1')
 
+
+### Finally, I saved this for the very end to check my work
+### auto.arima seems a bit like cheating
+library(forecast)
+auto.arima(mco.int)
+
+### I MIGHT BE A GENIUS I GOT IT RIGHT AND I AM SO EXCITED
 
 
 
